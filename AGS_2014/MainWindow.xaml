@@ -7,6 +7,7 @@
 		<Button x:Name="EncryptBtn" Content="Chiffrieren" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" Width="110" Click="EncryptBtn_Click"/>
 		<Button x:Name="DecryptBtn" Content="Dechiffrieren" HorizontalAlignment="Left" Margin="164,221,0,0" VerticalAlignment="Top" Width="110" Click="DecryptBtn_Click"/>
 		<TextBox x:Name="TargetTxtBox" Margin="10,248,10,10" TextWrapping="Wrap" AcceptsReturn="True"/>
+		<Label x:Name="statusLbl" Content="Label" HorizontalAlignment="Left" Margin="300,222,0,0" VerticalAlignment="Top"/>
 
 	</Grid>
 </Window>
