@@ -31,11 +31,11 @@ namespace AGS_2014
 
 			string cleantext = "";
 
-         for (int i = 0; i < plaintext.Length; i++)
-         {
-               if (char.IsLetterOrDigit(plaintext[i]))
-                  cleantext += plaintext[i];
-         }
+			for (int i = 0; i < plaintext.Length; i++)
+			{
+				if (char.IsLetterOrDigit(plaintext[i]))
+					cleantext += plaintext[i];
+			}
 
 			string ciphertext = "";
 			var matrix = MakeMatrix(cleantext, 4);
@@ -44,9 +44,9 @@ namespace AGS_2014
 
 			for (int i = 0; i < matrix[1].Length; i++)
 			{
-				ciphertext +=  matrix[1][i];
+				ciphertext += matrix[1][i];
 				if (i < matrix[3].Length)
-					ciphertext +=  matrix[3][i];
+					ciphertext += matrix[3][i];
 			}
 
 			foreach (var item in matrix[2])
@@ -66,7 +66,87 @@ namespace AGS_2014
 
 		private void DecryptBtn_Click(object sender, RoutedEventArgs e)
 		{
-			Console.WriteLine(MakeMatrix("0123456789abcdefg", 4));
+			var ciphertext_ = SourceTxtBox.Text;
+
+			string cleantext = "";
+
+			for (int i = 0; i < ciphertext_.Length; i++)
+			{
+				if (char.IsLetterOrDigit(ciphertext_[i]))
+					cleantext += ciphertext_[i];
+			}
+
+			string plaintext = "";
+
+			var rows = cleantext.Length / 4;
+			var remainder = cleantext.Length % 4;
+
+			string col1, col3, col24;
+			var col2 = new char[rows];
+			var col4 = new char[rows];
+
+			switch (remainder)
+			{
+				case 0:
+					// Geht genau auf
+					col1 = cleantext.Substring(0, rows);
+					col24 = cleantext.Substring(rows, rows * 2);
+					col3 = cleantext.Substring(3 * rows, rows);
+					break;
+				case 1:
+					col1 = cleantext.Substring(0, rows + 1);
+					col24 = cleantext.Substring(rows + 1, rows * 2);
+					col3 = cleantext.Substring(3 * rows + 1, rows);
+					break;
+				case 2:
+					col2 = new char[rows + 1];
+					col1 = cleantext.Substring(0, rows + 1);
+					col24 = cleantext.Substring(rows + 1, rows * 2 + 1);
+					col3 = cleantext.Substring(3 * rows + 2, rows);
+					break;
+				case 3:
+					col2 = new char[rows + 1];
+					col1 = cleantext.Substring(0, rows + 1);
+					col24 = cleantext.Substring(rows + 1, rows * 2 + 1);
+					col3 = cleantext.Substring(3 * rows + 2, rows + 1);
+					break;
+				default:
+					return;
+			}
+
+			for (int i = 0; i < col24.Length; i++)
+			{
+				if (i % 2 == 0)
+					col2[i / 2] = col24[i];
+				else
+					col4[i / 2] = col24[i];
+			}
+
+			for (int i = 0; i < rows + 1; i++)
+			{
+				try
+				{
+					plaintext += col1[i];
+					plaintext += col2[i];
+					plaintext += col3[i];
+					plaintext += col4[i];
+				}
+				catch (IndexOutOfRangeException)
+				{
+					break;
+				}
+			}
+
+			string final_plaintxt = "";
+			int pindex = 0;
+			for (int i = 0; i < ciphertext_.Length; i++)
+			{
+				if (char.IsLetterOrDigit(ciphertext_[i]))
+					final_plaintxt += plaintext[pindex++];
+				else
+					final_plaintxt += ciphertext_[i];
+			}
+			TargetTxtBox.Text = final_plaintxt;
 		}
 
 		private static char[][] MakeMatrix(string text, int columns)

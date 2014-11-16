@@ -1,12 +1,12 @@
 ﻿<Window x:Class="AGS_2014.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="450" Width="731">
+        Title="MainWindow" Height="591" Width="759">
 	<Grid>
-		<TextBox x:Name="SourceTxtBox" Height="89" Margin="10,10,10,0" TextWrapping="Wrap" Text="Anene1d-etGwnsil04v sip2" VerticalAlignment="Top"/>
-		<Button x:Name="EncryptBtn" Content="Chiffrieren" HorizontalAlignment="Left" Margin="10,104,0,0" VerticalAlignment="Top" Width="110" Click="EncryptBtn_Click"/>
-		<Button x:Name="DecryptBtn" Content="Dechiffrieren" HorizontalAlignment="Left" Margin="172,104,0,0" VerticalAlignment="Top" Width="110" Click="DecryptBtn_Click"/>
-		<TextBox x:Name="TargetTxtBox" Margin="10,131,10,10" TextWrapping="Wrap"/>
+		<TextBox x:Name="SourceTxtBox" Height="206" Margin="10,10,10,0" TextWrapping="Wrap" Text="Anene1d-etGwnsil04v sip2" VerticalAlignment="Top" AcceptsReturn="True"/>
+		<Button x:Name="EncryptBtn" Content="Chiffrieren" HorizontalAlignment="Left" Margin="10,221,0,0" VerticalAlignment="Top" Width="110" Click="EncryptBtn_Click"/>
+		<Button x:Name="DecryptBtn" Content="Dechiffrieren" HorizontalAlignment="Left" Margin="164,221,0,0" VerticalAlignment="Top" Width="110" Click="DecryptBtn_Click"/>
+		<TextBox x:Name="TargetTxtBox" Margin="10,248,10,10" TextWrapping="Wrap" AcceptsReturn="True"/>
 
 	</Grid>
 </Window>
